@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reporte NPS × Cursos — Pre Entrega</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+:root{--navy:#2D3277;--yellow:#FFE600;--bg:#f0f2f7}
+body{background:var(--bg);font-family:'Segoe UI',system-ui,sans-serif}
+.navbar{background:var(--navy)}
+.navbar-brand{color:var(--yellow)!important;font-weight:700;font-size:1.25rem;letter-spacing:.02em}
+.navbar-sub{color:rgba(255,255,255,.65);font-size:.82rem}
+.kpi-card{background:#fff;border-radius:14px;padding:1.4rem 1.6rem;box-shadow:0 2px 10px rgba(0,0,0,.07);height:100%}
+.kpi-val{font-size:2.4rem;font-weight:700;line-height:1}
+.kpi-lbl{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-top:.3rem}
+.section-title{font-size:1.1rem;font-weight:700;color:var(--navy);border-left:4px solid var(--yellow);padding-left:.7rem;margin-bottom:1.2rem}
+.office-card{background:#fff;border-radius:14px;padding:1.25rem;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.office-name{font-weight:700;color:var(--navy);font-size:1rem}
+.office-meta{font-size:.78rem;color:#888}
+.chart-sm{position:relative;height:190px}
+.chart-lg{position:relative;height:300px}
+.rep-card{background:#fff;border-radius:14px;padding:1.3rem;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.group-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .5rem;border-radius:4px;margin-bottom:.3rem}
+.filter-card{background:#fff;border-radius:14px;padding:1rem 1.4rem;box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:1.2rem}
+.nav-tabs .nav-link{color:#666;font-weight:500}
+.nav-tabs .nav-link.active{color:var(--navy);border-bottom:3px solid var(--yellow);font-weight:700}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+#office-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:1.2rem}
+</style>
+</head>
+<body>
+
+<nav class="navbar px-4 py-2 d-flex justify-content-between align-items-center">
+  <span class="navbar-brand">📊 NPS × Cursos | Pre Entrega</span>
+  <span class="navbar-sub">01/03/2026 al 14/04/2026 &nbsp;·&nbsp; Generado el 16/04/2026 10:58</span>
+</nav>
+
+<div class="container-fluid px-4 py-4">
+
+<!-- KPI row -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="kpi-card text-center">
+      <div class="kpi-val" id="kpi-nps" style="color:#27ae60">+46.6</div>
+      <div class="kpi-lbl">NPS General</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card text-center">
+      <div class="kpi-val" style="color:var(--navy)">7,899</div>
+      <div class="kpi-lbl">Encuestas</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card text-center">
+      <div class="kpi-val" style="color:var(--navy)">389</div>
+      <div class="kpi-lbl">Representantes</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card text-center">
+      <div class="kpi-val" style="color:var(--navy)">4</div>
+      <div class="kpi-lbl">Oficinas</div>
+    </div>
+  </div>
+</div>
+
+<!-- Course completion overview -->
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="kpi-card">
+      <div class="section-title">Completitud General de Cursos</div>
+      <div class="row">
+    <div class="col-md-4 mb-2">
+      <div class="d-flex justify-content-between mb-1">
+        <span class="fw-semibold" style="font-size:.85rem">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#e74c3c;margin-right:5px"></span>
+          Guía
+        </span>
+        <span class="fw-bold" style="color:#e74c3c">41.6%</span>
+      </div>
+      <div class="progress" style="height:8px;border-radius:4px">
+        <div class="progress-bar" style="width:41.6%;background:#e74c3c"></div>
+      </div>
+      <div style="font-size:.75rem;color:#888;margin-top:3px">162 de 389 representantes</div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <div class="d-flex justify-content-between mb-1">
+        <span class="fw-semibold" style="font-size:.85rem">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3498db;margin-right:5px"></span>
+          Exploración
+        </span>
+        <span class="fw-bold" style="color:#3498db">48.3%</span>
+      </div>
+      <div class="progress" style="height:8px;border-radius:4px">
+        <div class="progress-bar" style="width:48.3%;background:#3498db"></div>
+      </div>
+      <div style="font-size:.75rem;color:#888;margin-top:3px">188 de 389 representantes</div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <div class="d-flex justify-content-between mb-1">
+        <span class="fw-semibold" style="font-size:.85rem">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#27ae60;margin-right:5px"></span>
+          Viaje del Paquete
+        </span>
+        <span class="fw-bold" style="color:#27ae60">42.2%</span>
+      </div>
+      <div class="progress" style="height:8px;border-radius:4px">
+        <div class="progress-bar" style="width:42.2%;background:#27ae60"></div>
+      </div>
+      <div style="font-size:.75rem;color:#888;margin-top:3px">164 de 389 representantes</div>
+    </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs mb-0" id="mainTabs">
+  <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-office">Por Oficina</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-rep">Por Representante</a></li>
+</ul>
+
+<div class="tab-content pt-3">
+
+  <!-- TAB OFICINA -->
+  <div class="tab-pane fade show active" id="tab-office">
+    <div id="office-grid"></div>
+  </div>
+
+  <!-- TAB REPRESENTANTE -->
+  <div class="tab-pane fade" id="tab-rep">
+    <div class="filter-card d-flex flex-wrap align-items-end gap-3">
+      <div style="flex:1;min-width:200px">
+        <label class="form-label fw-semibold mb-1" style="font-size:.85rem">Buscar</label>
+        <input type="text" id="rep-search" class="form-control form-control-sm" placeholder="Escribí LDAP u oficina..." oninput="filterReps(this.value)">
+      </div>
+      <div style="flex:2;min-width:280px">
+        <label class="form-label fw-semibold mb-1" style="font-size:.85rem">Representante</label>
+        <select id="rep-select" class="form-select form-select-sm" onchange="loadRep(this.value)">
+          <option value="">— Elegir representante —</option>
+          <option value="abertola">abertola (INT) — 9 enc.</option>
+<option value="acalerobelis">acalerobelis (INT) — 7 enc.</option>
+<option value="aguponce">aguponce (INT) — 9 enc.</option>
+<option value="alanargarcia">alanargarcia (INT) — 14 enc.</option>
+<option value="anabaez">anabaez (INT) — 12 enc.</option>
+<option value="anmonzon">anmonzon (INT) — 19 enc.</option>
+<option value="asolaro">asolaro (INT) — 15 enc.</option>
+<option value="ayrfernandez">ayrfernandez (INT) — 9 enc.</option>
+<option value="bpereirarond">bpereirarond (INT) — 13 enc.</option>
+<option value="cageronimo">cageronimo (INT) — 18 enc.</option>
+<option value="crromero">crromero (INT) — 10 enc.</option>
+<option value="dambrosi">dambrosi (INT) — 28 enc.</option>
+<option value="emaneiro">emaneiro (INT) — 11 enc.</option>
+<option value="ext_aarmoren">ext_aarmoren (TP) — 13 enc.</option>
+<option value="ext_adotalor">ext_adotalor (TP) — 24 enc.</option>
+<option value="ext_adrconde">ext_adrconde (KTA) — 23 enc.</option>
+<option value="ext_ailescob">ext_ailescob (TP) — 12 enc.</option>
+<option value="ext_ailipena">ext_ailipena (KTA) — 11 enc.</option>
+<option value="ext_alejacal">ext_alejacal (OL) — 25 enc.</option>
+<option value="ext_aleolmos">ext_aleolmos (OL) — 28 enc.</option>
+<option value="ext_alexaber">ext_alexaber (TP) — 7 enc.</option>
+<option value="ext_alexlond">ext_alexlond (OL) — 2 enc.</option>
+<option value="ext_alicaro">ext_alicaro (KTA) — 23 enc.</option>
+<option value="ext_alospino">ext_alospino (TP) — 17 enc.</option>
+<option value="ext_alvesteb">ext_alvesteb (OL) — 45 enc.</option>
+<option value="ext_amiaguir">ext_amiaguir (OL) — 1 enc.</option>
+<option value="ext_anaalfon">ext_anaalfon (OL) — 1 enc.</option>
+<option value="ext_anabonil">ext_anabonil (OL) — 18 enc.</option>
+<option value="ext_anamonca">ext_anamonca (KTA) — 34 enc.</option>
+<option value="ext_anandino">ext_anandino (OL) — 38 enc.</option>
+<option value="ext_anaparej">ext_anaparej (TP) — 47 enc.</option>
+<option value="ext_ancasis">ext_ancasis (TP) — 1 enc.</option>
+<option value="ext_andagome">ext_andagome (TP) — 43 enc.</option>
+<option value="ext_andbasti">ext_andbasti (OL) — 10 enc.</option>
+<option value="ext_andpoved">ext_andpoved (KTA) — 15 enc.</option>
+<option value="ext_andreyal">ext_andreyal (OL) — 4 enc.</option>
+<option value="ext_angcubil">ext_angcubil (TP) — 29 enc.</option>
+<option value="ext_angellca">ext_angellca (TP) — 16 enc.</option>
+<option value="ext_angelybe">ext_angelybe (KTA) — 9 enc.</option>
+<option value="ext_angelyca">ext_angelyca (KTA) — 11 enc.</option>
+<option value="ext_anggarzo">ext_anggarzo (OL) — 12 enc.</option>
+<option value="ext_angialba">ext_angialba (OL) — 19 enc.</option>
+<option value="ext_angicruz">ext_angicruz (TP) — 11 enc.</option>
+<option value="ext_angilemu">ext_angilemu (KTA) — 10 enc.</option>
+<option value="ext_angisaav">ext_angisaav (KTA) — 8 enc.</option>
+<option value="ext_angtosca">ext_angtosca (OL) — 15 enc.</option>
+<option value="ext_anybarre">ext_anybarre (OL) — 21 enc.</option>
+<option value="ext_arialuna">ext_arialuna (TP) — 16 enc.</option>
+<option value="ext_arzapata">ext_arzapata (TP) — 16 enc.</option>
+<option value="ext_bautimar">ext_bautimar (OL) — 4 enc.</option>
+<option value="ext_beltjose">ext_beltjose (OL) — 45 enc.</option>
+<option value="ext_blediaz">ext_blediaz (KTA) — 12 enc.</option>
+<option value="ext_braacuna">ext_braacuna (KTA) — 33 enc.</option>
+<option value="ext_braalarc">ext_braalarc (TP) — 18 enc.</option>
+<option value="ext_brandove">ext_brandove (KTA) — 21 enc.</option>
+<option value="ext_braoyola">ext_braoyola (TP) — 10 enc.</option>
+<option value="ext_brgarate">ext_brgarate (OL) — 19 enc.</option>
+<option value="ext_brmurcia">ext_brmurcia (TP) — 17 enc.</option>
+<option value="ext_brpirafa">ext_brpirafa (TP) — 11 enc.</option>
+<option value="ext_buendani">ext_buendani (OL) — 27 enc.</option>
+<option value="ext_byrodiaz">ext_byrodiaz (KTA) — 4 enc.</option>
+<option value="ext_caagamez">ext_caagamez (OL) — 16 enc.</option>
+<option value="ext_cacotame">ext_cacotame (OL) — 12 enc.</option>
+<option value="ext_caldelau">ext_caldelau (KTA) — 20 enc.</option>
+<option value="ext_camigali">ext_camigali (KTA) — 5 enc.</option>
+<option value="ext_camilrin">ext_camilrin (TP) — 4 enc.</option>
+<option value="ext_caprecia">ext_caprecia (OL) — 12 enc.</option>
+<option value="ext_cardepau">ext_cardepau (TP) — 2 enc.</option>
+<option value="ext_carivcam">ext_carivcam (OL) — 31 enc.</option>
+<option value="ext_carrijul">ext_carrijul (OL) — 1 enc.</option>
+<option value="ext_caslaura">ext_caslaura (TP) — 19 enc.</option>
+<option value="ext_clbarina">ext_clbarina (TP) — 22 enc.</option>
+<option value="ext_conmario">ext_conmario (OL) — 1 enc.</option>
+<option value="ext_cranzola">ext_cranzola (KTA) — 55 enc.</option>
+<option value="ext_crbayona">ext_crbayona (OL) — 38 enc.</option>
+<option value="ext_crbricen">ext_crbricen (OL) — 23 enc.</option>
+<option value="ext_crcanon">ext_crcanon (TP) — 7 enc.</option>
+<option value="ext_cresteba">ext_cresteba (OL) — 71 enc.</option>
+<option value="ext_crgiron">ext_crgiron (OL) — 7 enc.</option>
+<option value="ext_cristcac">ext_cristcac (OL) — 27 enc.</option>
+<option value="ext_crroncan">ext_crroncan (KTA) — 64 enc.</option>
+<option value="ext_dacoral">ext_dacoral (TP) — 9 enc.</option>
+<option value="ext_dadiaza">ext_dadiaza (KTA) — 39 enc.</option>
+<option value="ext_dafontan">ext_dafontan (TP) — 3 enc.</option>
+<option value="ext_danbedoy">ext_danbedoy (TP) — 23 enc.</option>
+<option value="ext_danberdu">ext_danberdu (TP) — 18 enc.</option>
+<option value="ext_danicifu">ext_danicifu (OL) — 93 enc.</option>
+<option value="ext_daniemer">ext_daniemer (TP) — 23 enc.</option>
+<option value="ext_danilina">ext_danilina (OL) — 12 enc.</option>
+<option value="ext_danmurci">ext_danmurci (KTA) — 5 enc.</option>
+<option value="ext_dansofia">ext_dansofia (KTA) — 6 enc.</option>
+<option value="ext_daparede">ext_daparede (OL) — 54 enc.</option>
+<option value="ext_dasteven">ext_dasteven (KTA) — 52 enc.</option>
+<option value="ext_davbello">ext_davbello (KTA) — 10 enc.</option>
+<option value="ext_dayacuna">ext_dayacuna (KTA) — 18 enc.</option>
+<option value="ext_dayanadi">ext_dayanadi (TP) — 1 enc.</option>
+<option value="ext_daysegur">ext_daysegur (TP) — 6 enc.</option>
+<option value="ext_dedokoe">ext_dedokoe (TP) — 3 enc.</option>
+<option value="ext_dianneir">ext_dianneir (TP) — 7 enc.</option>
+<option value="ext_dibarrag">ext_dibarrag (OL) — 19 enc.</option>
+<option value="ext_dimaumar">ext_dimaumar (KTA) — 11 enc.</option>
+<option value="ext_disarmie">ext_disarmie (KTA) — 11 enc.</option>
+<option value="ext_diyeseni">ext_diyeseni (KTA) — 42 enc.</option>
+<option value="ext_donodiaz">ext_donodiaz (KTA) — 15 enc.</option>
+<option value="ext_dwgarzon">ext_dwgarzon (OL) — 31 enc.</option>
+<option value="ext_edalzate">ext_edalzate (TP) — 28 enc.</option>
+<option value="ext_edmontea">ext_edmontea (TP) — 2 enc.</option>
+<option value="ext_edpava">ext_edpava (OL) — 50 enc.</option>
+<option value="ext_eiroa">ext_eiroa (TP) — 20 enc.</option>
+<option value="ext_elizvega">ext_elizvega (OL) — 11 enc.</option>
+<option value="ext_encaball">ext_encaball (OL) — 42 enc.</option>
+<option value="ext_erikaare">ext_erikaare (KTA) — 5 enc.</option>
+<option value="ext_ervivas">ext_ervivas (OL) — 42 enc.</option>
+<option value="ext_esbalcer">ext_esbalcer (TP) — 3 enc.</option>
+<option value="ext_essarmie">ext_essarmie (TP) — 26 enc.</option>
+<option value="ext_estebroj">ext_estebroj (TP) — 8 enc.</option>
+<option value="ext_evospina">ext_evospina (KTA) — 10 enc.</option>
+<option value="ext_felipdav">ext_felipdav (KTA) — 26 enc.</option>
+<option value="ext_feliruiz">ext_feliruiz (TP) — 37 enc.</option>
+<option value="ext_fernagil">ext_fernagil (OL) — 17 enc.</option>
+<option value="ext_fernjosu">ext_fernjosu (TP) — 23 enc.</option>
+<option value="ext_flosebas">ext_flosebas (OL) — 27 enc.</option>
+<option value="ext_flurrego">ext_flurrego (TP) — 36 enc.</option>
+<option value="ext_fredpena">ext_fredpena (OL) — 38 enc.</option>
+<option value="ext_gabrordo">ext_gabrordo (KTA) — 31 enc.</option>
+<option value="ext_gambdani">ext_gambdani (KTA) — 18 enc.</option>
+<option value="ext_garclize">ext_garclize (KTA) — 17 enc.</option>
+<option value="ext_geestefa">ext_geestefa (KTA) — 14 enc.</option>
+<option value="ext_gelopera">ext_gelopera (OL) — 16 enc.</option>
+<option value="ext_geromont">ext_geromont (OL) — 2 enc.</option>
+<option value="ext_gilreyes">ext_gilreyes (TP) — 34 enc.</option>
+<option value="ext_giselldi">ext_giselldi (TP) — 16 enc.</option>
+<option value="ext_glesalga">ext_glesalga (TP) — 20 enc.</option>
+<option value="ext_glvivian">ext_glvivian (KTA) — 40 enc.</option>
+<option value="ext_gocacami">ext_gocacami (KTA) — 9 enc.</option>
+<option value="ext_gomezval">ext_gomezval (TP) — 3 enc.</option>
+<option value="ext_gomvalen">ext_gomvalen (KTA) — 33 enc.</option>
+<option value="ext_grlerzun">ext_grlerzun (KTA) — 4 enc.</option>
+<option value="ext_guilvale">ext_guilvale (OL) — 31 enc.</option>
+<option value="ext_gutiedav">ext_gutiedav (KTA) — 103 enc.</option>
+<option value="ext_gutipaul">ext_gutipaul (KTA) — 7 enc.</option>
+<option value="ext_harcabre">ext_harcabre (TP) — 7 enc.</option>
+<option value="ext_harcarde">ext_harcarde (OL) — 69 enc.</option>
+<option value="ext_hectrent">ext_hectrent (OL) — 33 enc.</option>
+<option value="ext_hersuare">ext_hersuare (TP) — 10 enc.</option>
+<option value="ext_ibacosta">ext_ibacosta (KTA) — 4 enc.</option>
+<option value="ext_ingospin">ext_ingospin (KTA) — 11 enc.</option>
+<option value="ext_isableon">ext_isableon (OL) — 46 enc.</option>
+<option value="ext_ivasegur">ext_ivasegur (KTA) — 14 enc.</option>
+<option value="ext_ivyara">ext_ivyara (KTA) — 22 enc.</option>
+<option value="ext_janihern">ext_janihern (KTA) — 41 enc.</option>
+<option value="ext_jannpena">ext_jannpena (KTA) — 15 enc.</option>
+<option value="ext_jebarran">ext_jebarran (TP) — 15 enc.</option>
+<option value="ext_jehumber">ext_jehumber (KTA) — 28 enc.</option>
+<option value="ext_jeimdiaz">ext_jeimdiaz (TP) — 29 enc.</option>
+<option value="ext_jeiparra">ext_jeiparra (OL) — 19 enc.</option>
+<option value="ext_jeisgali">ext_jeisgali (KTA) — 15 enc.</option>
+<option value="ext_jenifelo">ext_jenifelo (OL) — 45 enc.</option>
+<option value="ext_jennycas">ext_jennycas (TP) — 6 enc.</option>
+<option value="ext_jennyveg">ext_jennyveg (KTA) — 7 enc.</option>
+<option value="ext_jersovar">ext_jersovar (KTA) — 14 enc.</option>
+<option value="ext_jessikqu">ext_jessikqu (KTA) — 40 enc.</option>
+<option value="ext_jhcapera">ext_jhcapera (KTA) — 8 enc.</option>
+<option value="ext_jhofigue">ext_jhofigue (TP) — 14 enc.</option>
+<option value="ext_jhonatjh">ext_jhonatjh (OL) — 36 enc.</option>
+<option value="ext_jhonrios">ext_jhonrios (OL) — 24 enc.</option>
+<option value="ext_jhosariz">ext_jhosariz (TP) — 15 enc.</option>
+<option value="ext_jimeneka">ext_jimeneka (KTA) — 15 enc.</option>
+<option value="ext_jiojeda">ext_jiojeda (TP) — 19 enc.</option>
+<option value="ext_joangama">ext_joangama (TP) — 12 enc.</option>
+<option value="ext_joansoto">ext_joansoto (TP) — 12 enc.</option>
+<option value="ext_joapena">ext_joapena (TP) — 19 enc.</option>
+<option value="ext_jodelio">ext_jodelio (KTA) — 22 enc.</option>
+<option value="ext_johaguia">ext_johaguia (OL) — 26 enc.</option>
+<option value="ext_johcamar">ext_johcamar (TP) — 8 enc.</option>
+<option value="ext_johjulio">ext_johjulio (OL) — 9 enc.</option>
+<option value="ext_jonachac">ext_jonachac (KTA) — 21 enc.</option>
+<option value="ext_jonhpere">ext_jonhpere (OL) — 18 enc.</option>
+<option value="ext_jonrestr">ext_jonrestr (OL) — 2 enc.</option>
+<option value="ext_jorotalo">ext_jorotalo (OL) — 20 enc.</option>
+<option value="ext_josecubi">ext_josecubi (TP) — 16 enc.</option>
+<option value="ext_josepari">ext_josepari (OL) — 4 enc.</option>
+<option value="ext_joyaguar">ext_joyaguar (OL) — 29 enc.</option>
+<option value="ext_juaburba">ext_juaburba (TP) — 7 enc.</option>
+<option value="ext_juamarta">ext_juamarta (TP) — 5 enc.</option>
+<option value="ext_juaoband">ext_juaoband (OL) — 24 enc.</option>
+<option value="ext_juasenci">ext_juasenci (OL) — 16 enc.</option>
+<option value="ext_jucamrod">ext_jucamrod (KTA) — 48 enc.</option>
+<option value="ext_juchapel">ext_juchapel (KTA) — 24 enc.</option>
+<option value="ext_juchimas">ext_juchimas (TP) — 23 enc.</option>
+<option value="ext_judaruiz">ext_judaruiz (TP) — 10 enc.</option>
+<option value="ext_judfandi">ext_judfandi (KTA) — 13 enc.</option>
+<option value="ext_jufontec">ext_jufontec (TP) — 33 enc.</option>
+<option value="ext_jularrie">ext_jularrie (TP) — 28 enc.</option>
+<option value="ext_juliethd">ext_juliethd (OL) — 37 enc.</option>
+<option value="ext_julisier">ext_julisier (TP) — 12 enc.</option>
+<option value="ext_junumpaq">ext_junumpaq (KTA) — 68 enc.</option>
+<option value="ext_jupenuel">ext_jupenuel (TP) — 47 enc.</option>
+<option value="ext_jureinst">ext_jureinst (TP) — 36 enc.</option>
+<option value="ext_jutrijil">ext_jutrijil (TP) — 27 enc.</option>
+<option value="ext_kabaraja">ext_kabaraja (OL) — 50 enc.</option>
+<option value="ext_kamcelis">ext_kamcelis (TP) — 12 enc.</option>
+<option value="ext_kapenuel">ext_kapenuel (TP) — 31 enc.</option>
+<option value="ext_karehoyo">ext_karehoyo (KTA) — 29 enc.</option>
+<option value="ext_karenmon">ext_karenmon (OL) — 25 enc.</option>
+<option value="ext_karfandi">ext_karfandi (KTA) — 18 enc.</option>
+<option value="ext_karserna">ext_karserna (KTA) — 20 enc.</option>
+<option value="ext_kateluna">ext_kateluna (OL) — 42 enc.</option>
+<option value="ext_keanmart">ext_keanmart (KTA) — 4 enc.</option>
+<option value="ext_kebello">ext_kebello (OL) — 20 enc.</option>
+<option value="ext_keedgard">ext_keedgard (KTA) — 24 enc.</option>
+<option value="ext_kevanega">ext_kevanega (TP) — 4 enc.</option>
+<option value="ext_kevinbui">ext_kevinbui (TP) — 30 enc.</option>
+<option value="ext_kewbauti">ext_kewbauti (TP) — 21 enc.</option>
+<option value="ext_khlopez">ext_khlopez (TP) — 70 enc.</option>
+<option value="ext_laabril">ext_laabril (OL) — 12 enc.</option>
+<option value="ext_laalarco">ext_laalarco (TP) — 8 enc.</option>
+<option value="ext_lafontal">ext_lafontal (KTA) — 25 enc.</option>
+<option value="ext_lamacias">ext_lamacias (KTA) — 11 enc.</option>
+<option value="ext_lasimbaq">ext_lasimbaq (KTA) — 38 enc.</option>
+<option value="ext_laurball">ext_laurball (OL) — 17 enc.</option>
+<option value="ext_laureres">ext_laureres (KTA) — 40 enc.</option>
+<option value="ext_lealis">ext_lealis (KTA) — 10 enc.</option>
+<option value="ext_leicaice">ext_leicaice (KTA) — 20 enc.</option>
+<option value="ext_leonana">ext_leonana (TP) — 31 enc.</option>
+<option value="ext_leonasua">ext_leonasua (TP) — 19 enc.</option>
+<option value="ext_leporras">ext_leporras (TP) — 14 enc.</option>
+<option value="ext_leyparra">ext_leyparra (TP) — 19 enc.</option>
+<option value="ext_licaba">ext_licaba (KTA) — 23 enc.</option>
+<option value="ext_lichica">ext_lichica (TP) — 7 enc.</option>
+<option value="ext_lincorre">ext_lincorre (TP) — 38 enc.</option>
+<option value="ext_lipedraz">ext_lipedraz (TP) — 1 enc.</option>
+<option value="ext_lisecabr">ext_lisecabr (TP) — 17 enc.</option>
+<option value="ext_lorenamo">ext_lorenamo (OL) — 3 enc.</option>
+<option value="ext_lorleon">ext_lorleon (KTA) — 44 enc.</option>
+<option value="ext_luabella">ext_luabella (TP) — 25 enc.</option>
+<option value="ext_lucimeji">ext_lucimeji (TP) — 3 enc.</option>
+<option value="ext_lunagude">ext_lunagude (OL) — 26 enc.</option>
+<option value="ext_mafagua">ext_mafagua (KTA) — 41 enc.</option>
+<option value="ext_magalmor">ext_magalmor (OL) — 13 enc.</option>
+<option value="ext_maiforer">ext_maiforer (KTA) — 12 enc.</option>
+<option value="ext_mairrodr">ext_mairrodr (TP) — 31 enc.</option>
+<option value="ext_manhered">ext_manhered (KTA) — 1 enc.</option>
+<option value="ext_manuecam">ext_manuecam (TP) — 3 enc.</option>
+<option value="ext_marangul">ext_marangul (TP) — 14 enc.</option>
+<option value="ext_marcdian">ext_marcdian (TP) — 19 enc.</option>
+<option value="ext_marfreir">ext_marfreir (TP) — 36 enc.</option>
+<option value="ext_margfaja">ext_margfaja (OL) — 68 enc.</option>
+<option value="ext_margroja">ext_margroja (TP) — 31 enc.</option>
+<option value="ext_marinl">ext_marinl (KTA) — 32 enc.</option>
+<option value="ext_maritpar">ext_maritpar (KTA) — 25 enc.</option>
+<option value="ext_marlospi">ext_marlospi (KTA) — 15 enc.</option>
+<option value="ext_marqjime">ext_marqjime (TP) — 4 enc.</option>
+<option value="ext_marrobay">ext_marrobay (TP) — 23 enc.</option>
+<option value="ext_marveras">ext_marveras (TP) — 71 enc.</option>
+<option value="ext_masequea">ext_masequea (TP) — 18 enc.</option>
+<option value="ext_mateodua">ext_mateodua (OL) — 15 enc.</option>
+<option value="ext_maverast">ext_maverast (KTA) — 21 enc.</option>
+<option value="ext_mayrueda">ext_mayrueda (TP) — 49 enc.</option>
+<option value="ext_melissgo">ext_melissgo (TP) — 7 enc.</option>
+<option value="ext_michepen">ext_michepen (KTA) — 14 enc.</option>
+<option value="ext_michevel">ext_michevel (OL) — 31 enc.</option>
+<option value="ext_migcelis">ext_migcelis (KTA) — 25 enc.</option>
+<option value="ext_miguceli">ext_miguceli (OL) — 2 enc.</option>
+<option value="ext_miguefer">ext_miguefer (TP) — 9 enc.</option>
+<option value="ext_miriano">ext_miriano (TP) — 6 enc.</option>
+<option value="ext_modiaz">ext_modiaz (OL) — 1 enc.</option>
+<option value="ext_moesteba">ext_moesteba (OL) — 23 enc.</option>
+<option value="ext_moraliva">ext_moraliva (TP) — 22 enc.</option>
+<option value="ext_mosalama">ext_mosalama (TP) — 40 enc.</option>
+<option value="ext_msuarezf">ext_msuarezf (OL) — 2 enc.</option>
+<option value="ext_nicamelo">ext_nicamelo (OL) — 25 enc.</option>
+<option value="ext_nicoleon">ext_nicoleon (KTA) — 9 enc.</option>
+<option value="ext_nicrinco">ext_nicrinco (TP) — 45 enc.</option>
+<option value="ext_niriobo">ext_niriobo (TP) — 32 enc.</option>
+<option value="ext_paavila">ext_paavila (OL) — 26 enc.</option>
+<option value="ext_pabmurci">ext_pabmurci (TP) — 24 enc.</option>
+<option value="ext_paochava">ext_paochava (KTA) — 33 enc.</option>
+<option value="ext_paolatov">ext_paolatov (OL) — 55 enc.</option>
+<option value="ext_parradie">ext_parradie (KTA) — 5 enc.</option>
+<option value="ext_paubvela">ext_paubvela (TP) — 23 enc.</option>
+<option value="ext_pauorteg">ext_pauorteg (OL) — 1 enc.</option>
+<option value="ext_paurestr">ext_paurestr (OL) — 24 enc.</option>
+<option value="ext_ramirlau">ext_ramirlau (OL) — 15 enc.</option>
+<option value="ext_richajim">ext_richajim (KTA) — 23 enc.</option>
+<option value="ext_rickacos">ext_rickacos (TP) — 36 enc.</option>
+<option value="ext_roararat">ext_roararat (KTA) — 12 enc.</option>
+<option value="ext_rojbraya">ext_rojbraya (KTA) — 11 enc.</option>
+<option value="ext_rolargo">ext_rolargo (TP) — 13 enc.</option>
+<option value="ext_roroball">ext_roroball (TP) — 12 enc.</option>
+<option value="ext_rovnarva">ext_rovnarva (KTA) — 16 enc.</option>
+<option value="ext_saangulo">ext_saangulo (KTA) — 30 enc.</option>
+<option value="ext_sacaiced">ext_sacaiced (OL) — 15 enc.</option>
+<option value="ext_sachila">ext_sachila (OL) — 23 enc.</option>
+<option value="ext_sajunca">ext_sajunca (TP) — 15 enc.</option>
+<option value="ext_sandrfue">ext_sandrfue (OL) — 17 enc.</option>
+<option value="ext_santiaos">ext_santiaos (KTA) — 11 enc.</option>
+<option value="ext_saperdom">ext_saperdom (TP) — 34 enc.</option>
+<option value="ext_saracuev">ext_saracuev (TP) — 38 enc.</option>
+<option value="ext_sargalin">ext_sargalin (OL) — 18 enc.</option>
+<option value="ext_sarjaime">ext_sarjaime (OL) — 8 enc.</option>
+<option value="ext_sebbedoy">ext_sebbedoy (KTA) — 9 enc.</option>
+<option value="ext_semarroq">ext_semarroq (KTA) — 86 enc.</option>
+<option value="ext_sergiguz">ext_sergiguz (TP) — 5 enc.</option>
+<option value="ext_sharsuar">ext_sharsuar (OL) — 6 enc.</option>
+<option value="ext_shsaenz">ext_shsaenz (TP) — 6 enc.</option>
+<option value="ext_simonroy">ext_simonroy (TP) — 35 enc.</option>
+<option value="ext_simorami">ext_simorami (KTA) — 26 enc.</option>
+<option value="ext_sopriver">ext_sopriver (OL) — 31 enc.</option>
+<option value="ext_sthlozan">ext_sthlozan (TP) — 5 enc.</option>
+<option value="ext_stiverod">ext_stiverod (OL) — 1 enc.</option>
+<option value="ext_tanduart">ext_tanduart (KTA) — 29 enc.</option>
+<option value="ext_tantruji">ext_tantruji (TP) — 6 enc.</option>
+<option value="ext_vagalind">ext_vagalind (OL) — 17 enc.</option>
+<option value="ext_vaguacar">ext_vaguacar (OL) — 43 enc.</option>
+<option value="ext_valsanab">ext_valsanab (TP) — 6 enc.</option>
+<option value="ext_valvelan">ext_valvelan (KTA) — 21 enc.</option>
+<option value="ext_vanbarri">ext_vanbarri (KTA) — 18 enc.</option>
+<option value="ext_vannlope">ext_vannlope (TP) — 14 enc.</option>
+<option value="ext_vannsuar">ext_vannsuar (KTA) — 31 enc.</option>
+<option value="ext_vanvasqu">ext_vanvasqu (TP) — 8 enc.</option>
+<option value="ext_verjuan">ext_verjuan (TP) — 44 enc.</option>
+<option value="ext_veroruiz">ext_veroruiz (TP) — 28 enc.</option>
+<option value="ext_viamezqu">ext_viamezqu (KTA) — 4 enc.</option>
+<option value="ext_victopal">ext_victopal (OL) — 17 enc.</option>
+<option value="ext_villuisa">ext_villuisa (TP) — 19 enc.</option>
+<option value="ext_visehuan">ext_visehuan (TP) — 22 enc.</option>
+<option value="ext_wagil">ext_wagil (KTA) — 7 enc.</option>
+<option value="ext_weleon">ext_weleon (TP) — 21 enc.</option>
+<option value="ext_wialdema">ext_wialdema (KTA) — 36 enc.</option>
+<option value="ext_xiaguiar">ext_xiaguiar (TP) — 7 enc.</option>
+<option value="ext_yamesa">ext_yamesa (KTA) — 30 enc.</option>
+<option value="ext_yanegarc">ext_yanegarc (TP) — 6 enc.</option>
+<option value="ext_yegordil">ext_yegordil (TP) — 13 enc.</option>
+<option value="ext_yeimedin">ext_yeimedin (OL) — 31 enc.</option>
+<option value="ext_yemesa">ext_yemesa (TP) — 11 enc.</option>
+<option value="ext_yenserna">ext_yenserna (TP) — 18 enc.</option>
+<option value="ext_yercasti">ext_yercasti (OL) — 9 enc.</option>
+<option value="ext_yesikrod">ext_yesikrod (KTA) — 26 enc.</option>
+<option value="ext_yoangel">ext_yoangel (TP) — 16 enc.</option>
+<option value="ext_yohparra">ext_yohparra (OL) — 8 enc.</option>
+<option value="ext_yosepmar">ext_yosepmar (TP) — 2 enc.</option>
+<option value="ext_yuducuar">ext_yuducuar (KTA) — 10 enc.</option>
+<option value="ext_yufonsec">ext_yufonsec (TP) — 1 enc.</option>
+<option value="ext_yulcasal">ext_yulcasal (OL) — 45 enc.</option>
+<option value="ext_yulespit">ext_yulespit (OL) — 45 enc.</option>
+<option value="ext_yuliethm">ext_yuliethm (OL) — 35 enc.</option>
+<option value="ext_yulmarin">ext_yulmarin (TP) — 12 enc.</option>
+<option value="ext_yumoreno">ext_yumoreno (KTA) — 3 enc.</option>
+<option value="ext_yunmende">ext_yunmende (TP) — 22 enc.</option>
+<option value="ext_yurmarqu">ext_yurmarqu (TP) — 5 enc.</option>
+<option value="ext_zamoalej">ext_zamoalej (KTA) — 14 enc.</option>
+<option value="fetorres">fetorres (INT) — 3 enc.</option>
+<option value="fnunezfranco">fnunezfranco (INT) — 12 enc.</option>
+<option value="fpereiralute">fpereiralute (INT) — 26 enc.</option>
+<option value="fvassallo">fvassallo (INT) — 16 enc.</option>
+<option value="gerosuarez">gerosuarez (INT) — 14 enc.</option>
+<option value="ggandolfo">ggandolfo (INT) — 11 enc.</option>
+<option value="gicardi">gicardi (INT) — 16 enc.</option>
+<option value="iconsulrodri">iconsulrodri (INT) — 5 enc.</option>
+<option value="jgranada">jgranada (INT) — 6 enc.</option>
+<option value="joshfernande">joshfernande (INT) — 6 enc.</option>
+<option value="laporley">laporley (INT) — 39 enc.</option>
+<option value="lbares">lbares (INT) — 21 enc.</option>
+<option value="lcollins">lcollins (INT) — 2 enc.</option>
+<option value="lrangelchaci">lrangelchaci (INT) — 14 enc.</option>
+<option value="lrodriguezz">lrodriguezz (INT) — 16 enc.</option>
+<option value="lucasarodrig">lucasarodrig (INT) — 8 enc.</option>
+<option value="lzunin">lzunin (INT) — 20 enc.</option>
+<option value="malbin">malbin (INT) — 11 enc.</option>
+<option value="mariacosta">mariacosta (INT) — 24 enc.</option>
+<option value="materradas">materradas (INT) — 33 enc.</option>
+<option value="mazambuya">mazambuya (INT) — 4 enc.</option>
+<option value="mberobide">mberobide (INT) — 11 enc.</option>
+<option value="mdesotovolpe">mdesotovolpe (INT) — 21 enc.</option>
+<option value="miespina">miespina (INT) — 24 enc.</option>
+<option value="mmatorodrigu">mmatorodrigu (INT) — 15 enc.</option>
+<option value="mmoralesmato">mmoralesmato (INT) — 15 enc.</option>
+<option value="mmuniz">mmuniz (INT) — 11 enc.</option>
+<option value="mnavarro">mnavarro (INT) — 17 enc.</option>
+<option value="nirigoyen">nirigoyen (INT) — 35 enc.</option>
+<option value="patsosa">patsosa (INT) — 17 enc.</option>
+<option value="rchirico">rchirico (INT) — 18 enc.</option>
+<option value="rpiloni">rpiloni (INT) — 15 enc.</option>
+<option value="sfernandezsa">sfernandezsa (INT) — 23 enc.</option>
+<option value="slanternaalg">slanternaalg (INT) — 10 enc.</option>
+<option value="valmeidamora">valmeidamora (INT) — 11 enc.</option>
+<option value="valmoraes">valmoraes (INT) — 12 enc.</option>
+<option value="vromano">vromano (INT) — 19 enc.</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="rep-placeholder" class="text-center py-5 text-muted">
+      <div style="font-size:3rem">🔍</div>
+      <p>Seleccioná un representante para ver su evolución de NPS</p>
+    </div>
+
+    <div id="rep-section" style="display:none">
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="rep-card">
+            <div class="section-title" id="rep-title">—</div>
+            <div class="chart-lg"><canvas id="rep-chart"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="rep-card h-100">
+            <div class="fw-bold mb-3" style="color:var(--navy);font-size:.95rem">Detalle del representante</div>
+            <div id="rep-detail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- tab-content -->
+</div><!-- container -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const repData      = {"abertola": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [-100.0, 0.0, 100.0, 100.0], "courses": [], "total": 9}, "acalerobelis": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-30"], "nps": [-60.0, -100.0, -100.0], "courses": [], "total": 7}, "aguponce": {"office": "INT", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, 100.0, 66.7], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 9}, "alanargarcia": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 60.0, 0.0, 100.0, -100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 14}, "anabaez": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, -33.3, 100.0, -33.3], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 12}, "anmonzon": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [25.0, 0.0, 100.0, -100.0, 50.0, 0.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 19}, "asolaro": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, 100.0, 75.0, 25.0], "courses": [], "total": 15}, "ayrfernandez": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, -33.3, -100.0, 100.0, 50.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 9}, "bpereirarond": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, -50.0, 0.0, 0.0, 100.0], "courses": [], "total": 13}, "cageronimo": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [100.0, -100.0, 50.0, 33.3, 75.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 18}, "crromero": {"office": "INT", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 66.7, 60.0, -100.0], "courses": [], "total": 10}, "dambrosi": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [60.0, -25.0, 0.0, 100.0, 50.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 28}, "emaneiro": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, 100.0, 50.0, 33.3, 100.0], "courses": [], "total": 11}, "ext_aarmoren": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 60.0, 85.7], "courses": [{"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}], "total": 13}, "ext_adotalor": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [33.3, 100.0, 100.0, 50.0, 50.0], "courses": [], "total": 24}, "ext_adrconde": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [0.0, 100.0, 45.5, 16.7, 100.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 23}, "ext_ailescob": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [0.0, 14.3], "courses": [], "total": 12}, "ext_ailipena": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [66.7, 40.0], "courses": [], "total": 11}, "ext_alejacal": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 40.0, 100.0, 50.0, -20.0, 33.3, 100.0], "courses": [], "total": 25}, "ext_aleolmos": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, 100.0, 50.0, 50.0, 62.5, 75.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 28}, "ext_alexaber": {"office": "TP", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [-100.0, 0.0, 0.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 7}, "ext_alexlond": {"office": "OL", "weeks": ["2026-03-16"], "nps": [50.0], "courses": [], "total": 2}, "ext_alicaro": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 100.0, -25.0, 61.5, 100.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 23}, "ext_alospino": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, -33.3, 33.3, 100.0, 40.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 17}, "ext_alvesteb": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [87.5, 75.0, 25.0, 100.0, 66.7, 41.7, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 45}, "ext_amiaguir": {"office": "OL", "weeks": ["2026-03-09"], "nps": [100.0], "courses": [], "total": 1}, "ext_anaalfon": {"office": "OL", "weeks": ["2026-03-23"], "nps": [100.0], "courses": [], "total": 1}, "ext_anabonil": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16"], "nps": [12.5, -11.1, 0.0], "courses": [], "total": 18}, "ext_anamonca": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 56.2, 100.0, 66.7], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 34}, "ext_anandino": {"office": "OL", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [62.5, 36.4, 0.0, -50.0, 88.9, 50.0], "courses": [{"course": "Guía", "date": "2026-03-31", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 38}, "ext_anaparej": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [57.1, 44.4, 100.0, 75.0, 75.0, -6.7, 75.0], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 47}, "ext_ancasis": {"office": "TP", "weeks": ["2026-03-02"], "nps": [100.0], "courses": [], "total": 1}, "ext_andagome": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [62.5, 41.7, 50.0, 71.4, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 43}, "ext_andbasti": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06"], "nps": [50.0, 100.0, -100.0, 100.0, -66.7], "courses": [], "total": 10}, "ext_andpoved": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [-9.1, 50.0], "courses": [], "total": 15}, "ext_andreyal": {"office": "OL", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, 100.0, 100.0], "courses": [], "total": 4}, "ext_angcubil": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [100.0, 54.5, 25.0, 66.7, -50.0], "courses": [], "total": 29}, "ext_angellca": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 25.0, 72.7], "courses": [], "total": 16}, "ext_angelybe": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [83.3, 33.3], "courses": [], "total": 9}, "ext_angelyca": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30"], "nps": [-50.0, 33.3, 50.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 11}, "ext_anggarzo": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [0.0, 0.0, 100.0, 42.9, 0.0], "courses": [], "total": 12}, "ext_angialba": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [80.0, 50.0, 100.0, 100.0, 50.0, -66.7, 100.0], "courses": [], "total": 19}, "ext_angicruz": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [25.0, 71.4], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 11}, "ext_angilemu": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [0.0, -25.0], "courses": [], "total": 10}, "ext_angisaav": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [0.0, 100.0], "courses": [], "total": 8}, "ext_angtosca": {"office": "OL", "weeks": ["2026-03-09", "2026-04-06", "2026-04-13"], "nps": [50.0, 0.0, 66.7], "courses": [{"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 15}, "ext_anybarre": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 50.0, 100.0, -25.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 21}, "ext_arialuna": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [20.0, 33.3], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 16}, "ext_arzapata": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [66.7, 100.0, -100.0, 71.4, 33.3], "courses": [], "total": 16}, "ext_bautimar": {"office": "OL", "weeks": ["2026-03-16"], "nps": [50.0], "courses": [], "total": 4}, "ext_beltjose": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 0.0, 71.4, 50.0, 60.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 45}, "ext_blediaz": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [80.0, 50.0, 0.0], "courses": [], "total": 12}, "ext_braacuna": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [66.7, 28.6, 0.0, 100.0, 0.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 33}, "ext_braalarc": {"office": "TP", "weeks": ["2026-03-02", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 71.4, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 18}, "ext_brandove": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [0.0, 60.0, -8.3, 0.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 21}, "ext_braoyola": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [-50.0, 50.0], "courses": [], "total": 10}, "ext_brgarate": {"office": "OL", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 20.0, 100.0, 100.0, 50.0], "courses": [], "total": 19}, "ext_brmurcia": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [77.8, 50.0], "courses": [], "total": 17}, "ext_brpirafa": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-04-06"], "nps": [-50.0, 100.0, 0.0, 50.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 11}, "ext_buendani": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [40.0, 33.3, 100.0, -16.7, 50.0], "courses": [], "total": 27}, "ext_byrodiaz": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [0.0, 0.0, 100.0], "courses": [], "total": 4}, "ext_caagamez": {"office": "OL", "weeks": ["2026-03-09", "2026-04-06"], "nps": [40.0, 90.9], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 16}, "ext_cacotame": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-33.3, 33.3, 50.0, 50.0], "courses": [], "total": 12}, "ext_caldelau": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [20.0, -100.0, 66.7, 100.0, 100.0, -33.3], "courses": [{"course": "Guía", "date": "2026-03-28", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-28", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-28", "color": "#27ae60"}], "total": 20}, "ext_camigali": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16"], "nps": [0.0, 100.0, 66.7], "courses": [], "total": 5}, "ext_camilrin": {"office": "TP", "weeks": ["2026-03-02", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, 100.0], "courses": [], "total": 4}, "ext_caprecia": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09"], "nps": [45.5, 100.0], "courses": [], "total": 12}, "ext_cardepau": {"office": "TP", "weeks": ["2026-03-02"], "nps": [100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 2}, "ext_carivcam": {"office": "OL", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-20.0, 0.0, 100.0, 100.0, 77.8, 0.0], "courses": [], "total": 31}, "ext_carrijul": {"office": "OL", "weeks": ["2026-03-23"], "nps": [-100.0], "courses": [], "total": 1}, "ext_caslaura": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [100.0, 46.2], "courses": [], "total": 19}, "ext_clbarina": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 66.7, 0.0], "courses": [], "total": 22}, "ext_conmario": {"office": "OL", "weeks": ["2026-03-30"], "nps": [-100.0], "courses": [], "total": 1}, "ext_cranzola": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [50.0, 16.7, 0.0, 63.6, 66.7], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 55}, "ext_crbayona": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 22.2, -85.7, -14.3, 66.7], "courses": [], "total": 38}, "ext_crbricen": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 100.0, 0.0, 100.0, 100.0, 100.0], "courses": [], "total": 23}, "ext_crcanon": {"office": "TP", "weeks": ["2026-03-02", "2026-03-30", "2026-04-06"], "nps": [100.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 7}, "ext_cresteba": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [69.2, 72.7, 77.8, 100.0, 40.0, 78.9], "courses": [], "total": 71}, "ext_crgiron": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23"], "nps": [0.0, 33.3], "courses": [], "total": 7}, "ext_cristcac": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [28.6, 0.0, -16.7, 100.0, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-03", "color": "#3498db"}, {"course": "Guía", "date": "2026-04-05", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-05", "color": "#27ae60"}], "total": 27}, "ext_crroncan": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [62.5, 60.0, 100.0, 40.0, 62.5], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 64}, "ext_dacoral": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [100.0, 62.5], "courses": [], "total": 9}, "ext_dadiaza": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 56.2, -20.0, 35.7, 33.3], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 39}, "ext_dafontan": {"office": "TP", "weeks": ["2026-03-02"], "nps": [100.0], "courses": [], "total": 3}, "ext_danbedoy": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 44.4, 58.3], "courses": [], "total": 23}, "ext_danberdu": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, -100.0, 100.0, 62.5, 100.0], "courses": [], "total": 18}, "ext_danicifu": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [75.0, 82.4, 51.9, 31.2, 20.0, 92.3, 0.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 93}, "ext_daniemer": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-04-06", "2026-04-13"], "nps": [40.0, 100.0, 62.5, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 23}, "ext_danilina": {"office": "OL", "weeks": ["2026-03-02", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, 100.0, 50.0, 75.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 12}, "ext_danmurci": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [100.0, 25.0], "courses": [{"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 5}, "ext_dansofia": {"office": "KTA", "weeks": ["2026-03-16"], "nps": [83.3], "courses": [], "total": 6}, "ext_daparede": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [25.0, -50.0, 100.0, 66.7, 83.3, 37.5, 53.8], "courses": [], "total": 54}, "ext_dasteven": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 60.0, 42.9, 45.5, 40.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 52}, "ext_davbello": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [-77.8, -100.0], "courses": [], "total": 10}, "ext_dayacuna": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, -18.8], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 18}, "ext_dayanadi": {"office": "TP", "weeks": ["2026-03-09"], "nps": [-100.0], "courses": [], "total": 1}, "ext_daysegur": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [60.0, 100.0], "courses": [], "total": 6}, "ext_dedokoe": {"office": "TP", "weeks": ["2026-04-06"], "nps": [100.0], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 3}, "ext_dianneir": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 50.0, 100.0], "courses": [], "total": 7}, "ext_dibarrag": {"office": "OL", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-33.3, 77.8, 0.0, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}], "total": 19}, "ext_dimaumar": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 100.0, -33.3], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}, {"course": "Guía", "date": "2026-04-01", "color": "#e74c3c"}], "total": 11}, "ext_disarmie": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 50.0, 100.0, 66.7], "courses": [{"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 11}, "ext_diyeseni": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [61.5, 33.3, 83.3, 27.3, 100.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 42}, "ext_donodiaz": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [75.0, 40.0, 50.0], "courses": [], "total": 15}, "ext_dwgarzon": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [40.0, 100.0, 25.0, 12.5, 100.0, 42.9, 100.0], "courses": [], "total": 31}, "ext_edalzate": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-13"], "nps": [88.9, 100.0, 57.1, 33.3, 66.7], "courses": [{"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 28}, "ext_edmontea": {"office": "TP", "weeks": ["2026-03-09", "2026-03-30"], "nps": [0.0, 0.0], "courses": [], "total": 2}, "ext_edpava": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [83.3, 57.1, 75.0, 62.5, 100.0, 50.0, 20.0], "courses": [], "total": 50}, "ext_eiroa": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06"], "nps": [83.3, 33.3, 66.7, 60.0], "courses": [], "total": 20}, "ext_elizvega": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09"], "nps": [100.0, 44.4], "courses": [], "total": 11}, "ext_encaball": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 55.6, 100.0, 66.7, 100.0, 66.7, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 42}, "ext_erikaare": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, -50.0], "courses": [{"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 5}, "ext_ervivas": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, -33.3, 50.0, 11.1, 25.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 42}, "ext_esbalcer": {"office": "TP", "weeks": ["2026-04-06"], "nps": [33.3], "courses": [], "total": 3}, "ext_essarmie": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, -33.3, 100.0, 25.0, 0.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 26}, "ext_estebroj": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16"], "nps": [85.7, -100.0], "courses": [], "total": 8}, "ext_evospina": {"office": "KTA", "weeks": ["2026-03-30"], "nps": [90.0], "courses": [{"course": "Guía", "date": "2026-03-30", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-30", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 10}, "ext_felipdav": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [28.6, 20.0, 100.0, 54.5, 100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 26}, "ext_feliruiz": {"office": "TP", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 80.0, 50.0, 84.6, 20.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 37}, "ext_fernagil": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [75.0, 100.0, -100.0, 0.0, 100.0, 100.0, 50.0], "courses": [], "total": 17}, "ext_fernjosu": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [45.5, 91.7], "courses": [], "total": 23}, "ext_flosebas": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-20.0, -33.3, 25.0, 60.0, 33.3], "courses": [], "total": 27}, "ext_flurrego": {"office": "TP", "weeks": ["2026-02-23", "2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 80.0, 50.0, 50.0, 50.0, 50.0, 50.0], "courses": [], "total": 36}, "ext_fredpena": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [22.2, 66.7, 80.0, 75.0, 75.0, 75.0, 0.0], "courses": [], "total": 38}, "ext_gabrordo": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-100.0, 33.3, 33.3, 0.0, 25.0, 66.7], "courses": [{"course": "Guía", "date": "2026-03-28", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-28", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}], "total": 31}, "ext_gambdani": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 100.0, 60.0, 10.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 18}, "ext_garclize": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [-100.0, 50.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 17}, "ext_geestefa": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [60.0, 75.0, 60.0], "courses": [], "total": 14}, "ext_gelopera": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [20.0, -100.0, 66.7, 100.0, -100.0, 100.0], "courses": [], "total": 16}, "ext_geromont": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09"], "nps": [100.0, -100.0], "courses": [], "total": 2}, "ext_gilreyes": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [33.3, 23.1, -40.0, -28.6, 33.3], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 34}, "ext_giselldi": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 57.1, 57.1], "courses": [], "total": 16}, "ext_glesalga": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 60.0, 69.2], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 20}, "ext_glvivian": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [63.6, 33.3, 50.0, 76.9, 66.7], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 40}, "ext_gocacami": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23"], "nps": [0.0, 0.0], "courses": [], "total": 9}, "ext_gomezval": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [0.0, 50.0], "courses": [], "total": 3}, "ext_gomvalen": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [0.0, 100.0, 50.0, 50.0, 66.7, 100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 33}, "ext_grlerzun": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [-100.0, -66.7], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 4}, "ext_guilvale": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [42.9, -33.3, 33.3, 11.1, 33.3], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 31}, "ext_gutiedav": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [36.7, 76.9, 28.6, 35.7, 57.1, 30.8, 80.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 103}, "ext_gutipaul": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [25.0, 0.0], "courses": [], "total": 7}, "ext_harcabre": {"office": "TP", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 100.0, 0.0, 100.0], "courses": [], "total": 7}, "ext_harcarde": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [22.2, 63.6, 66.7, 53.8, 45.5, 33.3, 42.9], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 69}, "ext_hectrent": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, -100.0, 100.0, 100.0, 55.6, 57.1, 0.0], "courses": [], "total": 33}, "ext_hersuare": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23"], "nps": [100.0, 66.7, 20.0], "courses": [], "total": 10}, "ext_ibacosta": {"office": "KTA", "weeks": ["2026-03-16", "2026-04-06"], "nps": [-100.0, 33.3], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 4}, "ext_ingospin": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 100.0, 28.6, 0.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 11}, "ext_isableon": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [44.4, 71.4, 25.0, -50.0, 0.0, 0.0, -100.0], "courses": [], "total": 46}, "ext_ivasegur": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [0.0, -16.7], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 14}, "ext_ivyara": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [50.0, 75.0], "courses": [], "total": 22}, "ext_janihern": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16"], "nps": [28.6, 60.0, 100.0], "courses": [], "total": 41}, "ext_jannpena": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 33.3, -50.0, 0.0, 33.3], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-28", "color": "#27ae60"}], "total": 15}, "ext_jebarran": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, 33.3, 40.0], "courses": [], "total": 15}, "ext_jehumber": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [75.0, 33.3, -20.0, 80.0, 0.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 28}, "ext_jeimdiaz": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 75.0, 50.0, 100.0, 0.0, 50.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 29}, "ext_jeiparra": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, -25.0, 100.0, 100.0, 100.0, -100.0], "courses": [{"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 19}, "ext_jeisgali": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 16.7, 25.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 15}, "ext_jenifelo": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [20.0, 50.0, 50.0, 50.0, 55.6, 0.0, 28.6], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 45}, "ext_jennycas": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 0.0, 100.0], "courses": [], "total": 6}, "ext_jennyveg": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, -100.0, 100.0, -100.0], "courses": [{"course": "Guía", "date": "2026-03-28", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-28", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-28", "color": "#27ae60"}], "total": 7}, "ext_jersovar": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [50.0, 100.0, 20.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-31", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 14}, "ext_jessikqu": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [18.2, -6.7, 0.0, 0.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 40}, "ext_jhcapera": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 100.0, 40.0, -100.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-01", "color": "#27ae60"}], "total": 8}, "ext_jhofigue": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 100.0, 33.3, 80.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 14}, "ext_jhonatjh": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [20.0, 83.3, 66.7, 60.0, 66.7, 50.0, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 36}, "ext_jhonrios": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [20.0, 75.0, 50.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 24}, "ext_jhosariz": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [21.4, 100.0], "courses": [], "total": 15}, "ext_jimeneka": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [0.0, 66.7], "courses": [], "total": 15}, "ext_jiojeda": {"office": "TP", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 0.0, -22.2, -28.6], "courses": [], "total": 19}, "ext_joangama": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23"], "nps": [60.0, 75.0, 66.7], "courses": [], "total": 12}, "ext_joansoto": {"office": "TP", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [75.0, 50.0, 66.7, 66.7], "courses": [], "total": 12}, "ext_joapena": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 75.0, 62.5], "courses": [], "total": 19}, "ext_jodelio": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-33.3, 33.3, 33.3, -100.0], "courses": [], "total": 22}, "ext_johaguia": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [60.0, 0.0, 60.0, 16.7, 0.0], "courses": [], "total": 26}, "ext_johcamar": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [75.0, 100.0, 100.0, 100.0], "courses": [], "total": 8}, "ext_johjulio": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, -100.0, 100.0, 100.0], "courses": [], "total": 9}, "ext_jonachac": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 57.1, 100.0, 25.0, 0.0, 33.3], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 21}, "ext_jonhpere": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-04-06"], "nps": [22.2, 100.0, 40.0], "courses": [{"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}], "total": 18}, "ext_jonrestr": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09"], "nps": [100.0, 0.0], "courses": [], "total": 2}, "ext_jorotalo": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, -40.0, -50.0, -11.1], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 20}, "ext_josecubi": {"office": "TP", "weeks": ["2026-03-02", "2026-03-23", "2026-04-06"], "nps": [100.0, 77.8, 60.0], "courses": [], "total": 16}, "ext_josepari": {"office": "OL", "weeks": ["2026-03-16"], "nps": [0.0], "courses": [], "total": 4}, "ext_joyaguar": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [66.7, 100.0, 50.0, 100.0, 50.0, 100.0], "courses": [], "total": 29}, "ext_juaburba": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [100.0, 33.3], "courses": [], "total": 7}, "ext_juamarta": {"office": "TP", "weeks": ["2026-03-02"], "nps": [20.0], "courses": [], "total": 5}, "ext_juaoband": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [20.0, 11.1, 66.7, 0.0, 0.0], "courses": [], "total": 24}, "ext_juasenci": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-04-06", "2026-04-13"], "nps": [50.0, 33.3, 40.0, -100.0], "courses": [], "total": 16}, "ext_jucamrod": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 57.1, 75.0, 42.9, 69.2, 75.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 48}, "ext_juchapel": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [37.5, 33.3, 100.0, 40.0, 85.7], "courses": [], "total": 24}, "ext_juchimas": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-04-06"], "nps": [35.7, 0.0, 71.4], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 23}, "ext_judaruiz": {"office": "TP", "weeks": ["2026-03-16", "2026-03-30", "2026-04-06"], "nps": [-100.0, 0.0, 100.0], "courses": [], "total": 10}, "ext_judfandi": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [0.0, -11.1], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}], "total": 13}, "ext_jufontec": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 10.5, 22.2], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 33}, "ext_jularrie": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, -100.0, 40.0, -100.0, 100.0, 30.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 28}, "ext_juliethd": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 7.7, 0.0, -12.5, -33.3], "courses": [], "total": 37}, "ext_julisier": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23"], "nps": [0.0, 60.0], "courses": [], "total": 12}, "ext_junumpaq": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 58.3, 33.3, 25.0, 40.0, 33.3, -100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 68}, "ext_jupenuel": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 70.0, 88.9, 75.0, 100.0, 69.2, 20.0], "courses": [], "total": 47}, "ext_jureinst": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [100.0, 0.0, 62.5, 25.0, 50.0, 66.7], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 36}, "ext_jutrijil": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [25.0, 100.0, 100.0, 33.3, 100.0], "courses": [], "total": 27}, "ext_kabaraja": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [60.0, 57.1, 50.0, 87.5, 75.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 50}, "ext_kamcelis": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-13"], "nps": [50.0, 25.0, 50.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 12}, "ext_kapenuel": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 80.0, 42.9, 60.0, 100.0, 40.0], "courses": [], "total": 31}, "ext_karehoyo": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [58.8, 41.7], "courses": [], "total": 29}, "ext_karenmon": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [75.0, 100.0, 25.0, 33.3, 0.0, 33.3], "courses": [{"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 25}, "ext_karfandi": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [100.0, 0.0, -55.6, 50.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 18}, "ext_karserna": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 100.0, 42.9, 66.7, 50.0, 80.0], "courses": [{"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 20}, "ext_kateluna": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 100.0, 37.5, 66.7, 71.4, 66.7, 62.5], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 42}, "ext_keanmart": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23"], "nps": [100.0, 66.7], "courses": [], "total": 4}, "ext_kebello": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 75.0, 100.0, 100.0, 100.0], "courses": [], "total": 20}, "ext_keedgard": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [57.1, 100.0, 25.0, 77.8, 0.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 24}, "ext_kevanega": {"office": "TP", "weeks": ["2026-03-09", "2026-04-06"], "nps": [-100.0, 33.3], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 4}, "ext_kevinbui": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [80.0, 66.7, 50.0, 83.3, 66.7, 75.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 30}, "ext_kewbauti": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 28.6, 53.8], "courses": [], "total": 21}, "ext_khlopez": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [46.7, 71.4, 75.0, 66.7, 72.7, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 70}, "ext_laabril": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, -100.0, 100.0, 0.0, 0.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 12}, "ext_laalarco": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [100.0, 0.0], "courses": [], "total": 8}, "ext_lafontal": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [25.0, 50.0, 60.0], "courses": [], "total": 25}, "ext_lamacias": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [100.0, -25.0, 0.0], "courses": [], "total": 11}, "ext_lasimbaq": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-13"], "nps": [34.8, 0.0, 100.0, 50.0, 66.7], "courses": [{"course": "Guía", "date": "2026-03-30", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-30", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 38}, "ext_laurball": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 0.0, -16.7, -100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 17}, "ext_laureres": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 0.0, 12.5, -12.5, -100.0, -100.0], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}, {"course": "Guía", "date": "2026-03-28", "color": "#e74c3c"}], "total": 40}, "ext_lealis": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 25.0, 0.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 10}, "ext_leicaice": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 50.0, 25.0, 60.0, 0.0], "courses": [{"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}], "total": 20}, "ext_leonana": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [66.7, 71.4, 0.0, 36.4, -100.0], "courses": [], "total": 31}, "ext_leonasua": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 50.0, 70.0], "courses": [], "total": 19}, "ext_leporras": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 75.0, 75.0, 60.0], "courses": [], "total": 14}, "ext_leyparra": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [16.7, 50.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 19}, "ext_licaba": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [37.5, 71.4], "courses": [], "total": 23}, "ext_lichica": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [100.0, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 7}, "ext_lincorre": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [44.4, 71.4, -25.0, 100.0, 58.3, 60.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 38}, "ext_lipedraz": {"office": "TP", "weeks": ["2026-04-06"], "nps": [100.0], "courses": [], "total": 1}, "ext_lisecabr": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-66.7, -42.9, 0.0], "courses": [], "total": 17}, "ext_lorenamo": {"office": "OL", "weeks": ["2026-03-16"], "nps": [-100.0], "courses": [], "total": 3}, "ext_lorleon": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 66.7, 47.4, -50.0, -100.0, 80.0, 40.0], "courses": [{"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 44}, "ext_luabella": {"office": "TP", "weeks": ["2026-02-23", "2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 80.0, 66.7, 25.0, 33.3, 75.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 25}, "ext_lucimeji": {"office": "TP", "weeks": ["2026-04-06", "2026-04-13"], "nps": [100.0, 0.0], "courses": [], "total": 3}, "ext_lunagude": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-50.0, 0.0, -25.0, 42.9, 20.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 26}, "ext_mafagua": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 20.0, 50.0, 50.0, -16.7, 100.0], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}, {"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}], "total": 41}, "ext_magalmor": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 100.0, 0.0, 100.0, 20.0, -100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 13}, "ext_maiforer": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [-33.3, -33.3], "courses": [], "total": 12}, "ext_mairrodr": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [92.3, 28.6, 16.7, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 31}, "ext_manhered": {"office": "KTA", "weeks": ["2026-03-23"], "nps": [0.0], "courses": [], "total": 1}, "ext_manuecam": {"office": "TP", "weeks": ["2026-03-09", "2026-04-06"], "nps": [-100.0, 50.0], "courses": [], "total": 3}, "ext_marangul": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 100.0, 0.0, 25.0], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 14}, "ext_marcdian": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [100.0, 33.3], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 19}, "ext_marfreir": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [40.0, 60.0, 85.7, 100.0, 0.0, 60.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 36}, "ext_margfaja": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [83.3, 42.9, 100.0, 70.0, 100.0, 75.0, 90.0], "courses": [], "total": 68}, "ext_margroja": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [60.0, 71.4, 71.4, 66.7, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 31}, "ext_marinl": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-60.0, 0.0, 40.0, 46.2, 0.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 32}, "ext_maritpar": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, -100.0, 11.1, -100.0, 25.0], "courses": [{"course": "Guía", "date": "2026-03-31", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 25}, "ext_marlospi": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 38.5, 100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 15}, "ext_marqjime": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30"], "nps": [100.0, 100.0], "courses": [], "total": 4}, "ext_marrobay": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [80.0, 100.0, 100.0, 33.3, 75.0, 60.0], "courses": [], "total": 23}, "ext_marveras": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [76.9, 73.3, 54.5, 60.0, 85.7, 62.5], "courses": [], "total": 71}, "ext_masequea": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-100.0, 0.0, 33.3, 100.0, 80.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 18}, "ext_mateodua": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09"], "nps": [90.0, 20.0], "courses": [], "total": 15}, "ext_maverast": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 0.0, 0.0, 50.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 21}, "ext_mayrueda": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 76.9, 85.7, 100.0, 57.1, 100.0], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 49}, "ext_melissgo": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 50.0, -100.0], "courses": [], "total": 7}, "ext_michepen": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [0.0, 25.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-30", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-30", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 14}, "ext_michevel": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [16.7, -14.3, 100.0, -20.0, 66.7], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 31}, "ext_migcelis": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, 72.7, 60.0], "courses": [{"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 25}, "ext_miguceli": {"office": "OL", "weeks": ["2026-03-16"], "nps": [-100.0], "courses": [], "total": 2}, "ext_miguefer": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [60.0, 100.0, 100.0], "courses": [], "total": 9}, "ext_miriano": {"office": "TP", "weeks": ["2026-03-23", "2026-04-13"], "nps": [40.0, 100.0], "courses": [], "total": 6}, "ext_modiaz": {"office": "OL", "weeks": ["2026-03-02"], "nps": [100.0], "courses": [], "total": 1}, "ext_moesteba": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [100.0, -100.0, 0.0, -33.3], "courses": [], "total": 23}, "ext_moraliva": {"office": "TP", "weeks": ["2026-02-23", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, -100.0, 20.0, 50.0, 50.0], "courses": [], "total": 22}, "ext_mosalama": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [50.0, 81.8, 87.5, 77.8, 100.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 40}, "ext_msuarezf": {"office": "OL", "weeks": ["2026-03-23", "2026-04-06"], "nps": [-100.0, -100.0], "courses": [], "total": 2}, "ext_nicamelo": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 40.0, 20.0, 75.0, 66.7, 0.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-03", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-03", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-03", "color": "#27ae60"}], "total": 25}, "ext_nicoleon": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-30"], "nps": [100.0, 85.7], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}], "total": 9}, "ext_nicrinco": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 80.0, 87.5, 83.3, 100.0, 61.5, 50.0], "courses": [], "total": 45}, "ext_niriobo": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [75.0, 100.0, 87.5, 75.0, 50.0, 0.0], "courses": [], "total": 32}, "ext_paavila": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [85.7, 25.0, 50.0, 85.7], "courses": [], "total": 26}, "ext_pabmurci": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 66.7, 83.3, 83.3, 100.0], "courses": [], "total": 24}, "ext_paochava": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 33.3, -40.0, 80.0, 60.0, 80.0], "courses": [{"course": "Guía", "date": "2026-03-29", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-30", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 33}, "ext_paolatov": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [57.1, 100.0, 78.6, 50.0, 83.3, 81.8, 87.5], "courses": [], "total": 55}, "ext_parradie": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-30"], "nps": [100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 5}, "ext_paubvela": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 55.6, 100.0, 66.7, 71.4], "courses": [], "total": 23}, "ext_pauorteg": {"office": "OL", "weeks": ["2026-04-13"], "nps": [-100.0], "courses": [], "total": 1}, "ext_paurestr": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [25.0, -66.7, -33.3, 12.5], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 24}, "ext_ramirlau": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, 25.0, -100.0, 40.0, 100.0], "courses": [], "total": 15}, "ext_richajim": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-50.0, 20.0, 66.7, 66.7, -25.0], "courses": [{"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-01", "color": "#27ae60"}], "total": 23}, "ext_rickacos": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [60.0, 100.0, -33.3, 30.0, 100.0], "courses": [], "total": 36}, "ext_roararat": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [14.3, -20.0], "courses": [], "total": 12}, "ext_rojbraya": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-30"], "nps": [100.0, 0.0], "courses": [{"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}, {"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}], "total": 11}, "ext_rolargo": {"office": "TP", "weeks": ["2026-03-02", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-33.3, 85.7, 100.0, 100.0], "courses": [], "total": 13}, "ext_roroball": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 80.0, 33.3], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 12}, "ext_rovnarva": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [50.0, 87.5], "courses": [], "total": 16}, "ext_saangulo": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [50.0, 62.5, -20.0, 54.5, -50.0], "courses": [{"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 30}, "ext_sacaiced": {"office": "OL", "weeks": ["2026-03-09", "2026-04-06", "2026-04-13"], "nps": [50.0, 71.4, 50.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 15}, "ext_sachila": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-04-06", "2026-04-13"], "nps": [50.0, 66.7, 33.3, 100.0], "courses": [{"course": "Guía", "date": "2026-04-06", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-06", "color": "#27ae60"}], "total": 23}, "ext_sajunca": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23"], "nps": [66.7, 20.0, 100.0], "courses": [], "total": 15}, "ext_sandrfue": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [60.0, 100.0, 100.0, 33.3, 50.0, 75.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 17}, "ext_santiaos": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23"], "nps": [25.0, 0.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 11}, "ext_saperdom": {"office": "TP", "weeks": ["2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [50.0, 33.3, 33.3, 44.4], "courses": [], "total": 34}, "ext_saracuev": {"office": "TP", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 50.0, 50.0, 50.0, 70.6, 100.0], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 38}, "ext_sargalin": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [-100.0, 50.0, 0.0, 40.0, 33.3, 100.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 18}, "ext_sarjaime": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23"], "nps": [60.0, -100.0], "courses": [], "total": 8}, "ext_sebbedoy": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, -50.0, 60.0, 100.0], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 9}, "ext_semarroq": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, 65.0, 38.5, 63.6, 16.7, 57.1, 100.0], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 86}, "ext_sergiguz": {"office": "TP", "weeks": ["2026-04-06"], "nps": [20.0], "courses": [], "total": 5}, "ext_sharsuar": {"office": "OL", "weeks": ["2026-03-16", "2026-03-30"], "nps": [-20.0, 100.0], "courses": [], "total": 6}, "ext_shsaenz": {"office": "TP", "weeks": ["2026-04-06", "2026-04-13"], "nps": [50.0, 50.0], "courses": [], "total": 6}, "ext_simonroy": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [55.6, 73.3, 100.0, -100.0, 100.0, 75.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 35}, "ext_simorami": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [60.0, 66.7, 100.0, -33.3, 66.7, 83.3, 75.0], "courses": [{"course": "Guía", "date": "2026-03-30", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-30", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 26}, "ext_sopriver": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [28.6, 80.0, 55.6, 100.0, 50.0, -33.3, 100.0], "courses": [], "total": 31}, "ext_sthlozan": {"office": "TP", "weeks": ["2026-04-06"], "nps": [0.0], "courses": [], "total": 5}, "ext_stiverod": {"office": "OL", "weeks": ["2026-04-13"], "nps": [0.0], "courses": [], "total": 1}, "ext_tanduart": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [28.6, 0.0, 0.0, 21.4, -20.0], "courses": [{"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 29}, "ext_tantruji": {"office": "TP", "weeks": ["2026-02-23", "2026-03-23", "2026-04-06"], "nps": [0.0, 100.0, 33.3], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 6}, "ext_vagalind": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [0.0, 0.0, 20.0, 0.0], "courses": [], "total": 17}, "ext_vaguacar": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [71.4, 50.0, 75.0, 16.7, 100.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-31", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 43}, "ext_valsanab": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [75.0, -100.0], "courses": [], "total": 6}, "ext_valvelan": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, 100.0, 0.0, 60.0, 100.0], "courses": [{"course": "Guía", "date": "2026-03-25", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-25", "color": "#27ae60"}], "total": 21}, "ext_vanbarri": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30"], "nps": [-33.3, 100.0, 20.0, -50.0], "courses": [], "total": 18}, "ext_vannlope": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [66.7, 20.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 14}, "ext_vannsuar": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-13"], "nps": [100.0, 46.2, -33.3, 23.1, 100.0], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 31}, "ext_vanvasqu": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [25.0, 50.0], "courses": [{"course": "Guía", "date": "2026-04-10", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-10", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-10", "color": "#27ae60"}], "total": 8}, "ext_verjuan": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [69.6, 80.0, 100.0, 57.1, 85.7], "courses": [], "total": 44}, "ext_veroruiz": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, 70.0, 33.3], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 28}, "ext_viamezqu": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [0.0, -100.0], "courses": [], "total": 4}, "ext_victopal": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [0.0, 100.0, 100.0, 75.0, 42.9, 0.0], "courses": [{"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-07", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 17}, "ext_villuisa": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16"], "nps": [75.0, 100.0, -66.7], "courses": [], "total": 19}, "ext_visehuan": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 0.0, 33.3, 0.0, 30.0], "courses": [], "total": 22}, "ext_wagil": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09"], "nps": [80.0, 50.0], "courses": [], "total": 7}, "ext_weleon": {"office": "TP", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [83.3, 100.0, 33.3, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 21}, "ext_wialdema": {"office": "KTA", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [28.6, 30.8, 57.1, 100.0, 66.7], "courses": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 36}, "ext_xiaguiar": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [-100.0, 100.0, 100.0, 100.0], "courses": [], "total": 7}, "ext_yamesa": {"office": "KTA", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [-100.0, 31.6, 50.0, 75.0], "courses": [{"course": "Exploración", "date": "2026-03-25", "color": "#3498db"}, {"course": "Guía", "date": "2026-03-29", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-30", "color": "#27ae60"}], "total": 30}, "ext_yanegarc": {"office": "TP", "weeks": ["2026-03-02", "2026-03-09"], "nps": [-100.0, 60.0], "courses": [], "total": 6}, "ext_yegordil": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [-100.0, 60.0, 50.0], "courses": [], "total": 13}, "ext_yeimedin": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [80.0, 100.0, 42.9, 20.0, 100.0, -50.0], "courses": [], "total": 31}, "ext_yemesa": {"office": "TP", "weeks": ["2026-02-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 50.0, 75.0], "courses": [], "total": 11}, "ext_yenserna": {"office": "TP", "weeks": ["2026-03-30", "2026-04-06"], "nps": [70.0, 12.5], "courses": [], "total": 18}, "ext_yercasti": {"office": "OL", "weeks": ["2026-03-16", "2026-03-23"], "nps": [-25.0, -100.0], "courses": [], "total": 9}, "ext_yesikrod": {"office": "KTA", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-04-06", "2026-04-13"], "nps": [50.0, 50.0, 0.0, 60.0, 33.3], "courses": [{"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-26", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-26", "color": "#27ae60"}], "total": 26}, "ext_yoangel": {"office": "TP", "weeks": ["2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, -100.0, 100.0, 58.3], "courses": [{"course": "Guía", "date": "2026-04-11", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-11", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-11", "color": "#27ae60"}], "total": 16}, "ext_yohparra": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 0.0, 100.0, 100.0, 100.0], "courses": [], "total": 8}, "ext_yosepmar": {"office": "TP", "weeks": ["2026-03-09"], "nps": [50.0], "courses": [], "total": 2}, "ext_yuducuar": {"office": "KTA", "weeks": ["2026-03-23", "2026-03-30"], "nps": [100.0, 62.5], "courses": [{"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Guía", "date": "2026-03-26", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 10}, "ext_yufonsec": {"office": "TP", "weeks": ["2026-04-06"], "nps": [100.0], "courses": [], "total": 1}, "ext_yulcasal": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [14.3, 50.0, 0.0, 50.0, 100.0, 0.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}], "total": 45}, "ext_yulespit": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [81.8, 88.9, 55.6, 33.3, 60.0, 66.7, 100.0], "courses": [{"course": "Exploración", "date": "2026-04-06", "color": "#3498db"}, {"course": "Guía", "date": "2026-04-07", "color": "#e74c3c"}, {"course": "Viaje del Paquete", "date": "2026-04-07", "color": "#27ae60"}], "total": 45}, "ext_yuliethm": {"office": "OL", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [66.7, -16.7, -16.7, 0.0, 20.0, 66.7, -33.3], "courses": [], "total": 35}, "ext_yulmarin": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30"], "nps": [83.3, 83.3], "courses": [], "total": 12}, "ext_yumoreno": {"office": "KTA", "weeks": ["2026-03-02"], "nps": [33.3], "courses": [], "total": 3}, "ext_yunmende": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06"], "nps": [50.0, 50.0, 50.0], "courses": [], "total": 22}, "ext_yurmarqu": {"office": "TP", "weeks": ["2026-03-23", "2026-03-30"], "nps": [0.0, -33.3], "courses": [], "total": 5}, "ext_zamoalej": {"office": "KTA", "weeks": ["2026-03-30", "2026-04-06", "2026-04-13"], "nps": [0.0, 60.0, -100.0], "courses": [{"course": "Guía", "date": "2026-03-27", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-27", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-27", "color": "#27ae60"}], "total": 14}, "fetorres": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, -100.0, 100.0], "courses": [], "total": 3}, "fnunezfranco": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 66.7, 0.0, -100.0, 100.0, -100.0], "courses": [], "total": 12}, "fpereiralute": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [33.3, 100.0, 50.0, 100.0, 100.0, 80.0], "courses": [], "total": 26}, "fvassallo": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 33.3, 0.0, 100.0, 100.0, 100.0], "courses": [], "total": 16}, "gerosuarez": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [66.7, 80.0, 50.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 14}, "ggandolfo": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 100.0, 0.0], "courses": [], "total": 11}, "gicardi": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 75.0, 60.0, 50.0, 0.0], "courses": [], "total": 16}, "iconsulrodri": {"office": "INT", "weeks": ["2026-03-23"], "nps": [80.0], "courses": [], "total": 5}, "jgranada": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23"], "nps": [100.0, 100.0, 100.0], "courses": [], "total": 6}, "joshfernande": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-30"], "nps": [0.0, 100.0, 100.0], "courses": [], "total": 6}, "laporley": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [83.3, 50.0, 60.0, 100.0, -100.0, 57.1, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 39}, "lbares": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [-50.0, 100.0, 0.0, 100.0, -33.3, 20.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 21}, "lcollins": {"office": "INT", "weeks": ["2026-03-23"], "nps": [100.0], "courses": [], "total": 2}, "lrangelchaci": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 0.0, 0.0, 50.0, 100.0, 33.3, -100.0], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 14}, "lrodriguezz": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [100.0, 60.0, 100.0, 16.7], "courses": [{"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 16}, "lucasarodrig": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23"], "nps": [100.0, 66.7, 100.0], "courses": [], "total": 8}, "lzunin": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 50.0, 0.0, -50.0, -25.0, 100.0, -50.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 20}, "malbin": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 50.0, 50.0, 100.0], "courses": [], "total": 11}, "mariacosta": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 16.7, 66.7, 100.0, 25.0, 0.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 24}, "materradas": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [80.0, 100.0, 75.0, 88.9, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 33}, "mazambuya": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 50.0, 100.0], "courses": [], "total": 4}, "mberobide": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, 50.0, 50.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 11}, "mdesotovolpe": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 100.0, 100.0, 0.0, 66.7, 100.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 21}, "miespina": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [66.7, 60.0, 33.3, 25.0, 40.0, 0.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 24}, "mmatorodrigu": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [0.0, 100.0, 40.0, 100.0], "courses": [], "total": 15}, "mmoralesmato": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps": [100.0, -100.0, 66.7, 50.0, 100.0], "courses": [], "total": 15}, "mmuniz": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [0.0, -100.0, 33.3, -50.0], "courses": [], "total": 11}, "mnavarro": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-04-06", "2026-04-13"], "nps": [50.0, 100.0, 71.4, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 17}, "nirigoyen": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [85.7, 50.0, 100.0, 50.0, 25.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 35}, "patsosa": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [85.7, 0.0, 0.0, 40.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-13", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-13", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-13", "color": "#27ae60"}], "total": 17}, "rchirico": {"office": "INT", "weeks": ["2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 100.0, 33.3, 20.0, -50.0], "courses": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 18}, "rpiloni": {"office": "INT", "weeks": ["2026-03-02", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06"], "nps": [100.0, 25.0, 0.0, 100.0, 60.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 15}, "sfernandezsa": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [40.0, -12.5, -100.0, 0.0, 0.0, 100.0], "courses": [{"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}, {"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}], "total": 23}, "slanternaalg": {"office": "INT", "weeks": ["2026-03-09", "2026-04-06", "2026-04-13"], "nps": [-33.3, 80.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}], "total": 10}, "valmeidamora": {"office": "INT", "weeks": ["2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [100.0, 100.0, 100.0, 100.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 11}, "valmoraes": {"office": "INT", "weeks": ["2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [25.0, 100.0, 50.0, 100.0], "courses": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 12}, "vromano": {"office": "INT", "weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23"], "nps": [33.3, 100.0, 100.0, 60.0], "courses": [], "total": 19}};
+const officeData   = {"INT": {"weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [61.6, 38.1, 54.7, 55.3, 36.8, 58.8, 32.4], "completion": [{"course": "Guía", "completed": 24, "assigned": 24, "total_reps": 48, "pct": 50, "color": "#e74c3c"}, {"course": "Exploración", "completed": 26, "assigned": 27, "total_reps": 48, "pct": 54, "color": "#3498db"}, {"course": "Viaje del Paquete", "completed": 21, "assigned": 21, "total_reps": 48, "pct": 44, "color": "#27ae60"}], "course_dates": [{"course": "Guía", "date": "2026-04-08", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-08", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-08", "color": "#27ae60"}], "total": 755, "n_reps": 48, "nps_mar": 51.3, "nps_apr": 49.3, "delta_curso": -4.3, "weeks_with": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_with": [66.1, 44.3, 49.2, 59.0, 25.4, 51.6, 34.5], "n_with": 21, "weeks_without": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_without": [54.8, 28.3, 59.2, 52.6, 65.4, 74.4, 25.0], "n_without": 28}, "KTA": {"weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [37.1, 40.6, 43.1, 37.3, 33.3, 45.8, 44.8], "completion": [{"course": "Guía", "completed": 68, "assigned": 68, "total_reps": 76, "pct": 89, "color": "#e74c3c"}, {"course": "Exploración", "completed": 74, "assigned": 74, "total_reps": 76, "pct": 97, "color": "#3498db"}, {"course": "Viaje del Paquete", "completed": 73, "assigned": 73, "total_reps": 76, "pct": 96, "color": "#27ae60"}], "course_dates": [{"course": "Guía", "date": "2026-03-24", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-24", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-24", "color": "#27ae60"}], "total": 2306, "n_reps": 76, "nps_mar": 37.6, "nps_apr": 42.7, "delta_curso": -1.5, "weeks_with": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_with": [44.2, 38.6, 40.0, 38.0, 32.0, 46.2, 44.8], "n_with": 73, "weeks_without": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30"], "nps_without": [75.0, 40.0, 100.0, 50.0, 85.7], "n_without": 3}, "OL": {"weeks": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [55.0, 55.3, 37.7, 34.4, 47.2, 43.7, 49.2], "completion": [{"course": "Guía", "completed": 36, "assigned": 37, "total_reps": 86, "pct": 42, "color": "#e74c3c"}, {"course": "Exploración", "completed": 47, "assigned": 48, "total_reps": 86, "pct": 55, "color": "#3498db"}, {"course": "Viaje del Paquete", "completed": 35, "assigned": 35, "total_reps": 86, "pct": 41, "color": "#27ae60"}], "course_dates": [{"course": "Guía", "date": "2026-03-31", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-03-31", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-03-31", "color": "#27ae60"}], "total": 2380, "n_reps": 86, "nps_mar": 44.1, "nps_apr": 46.4, "delta_curso": 1.6, "weeks_with": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_with": [58.4, 64.4, 47.1, 29.9, 42.2, 43.3, 54.9], "n_with": 35, "weeks_without": ["2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_without": [52.4, 58.7, 43.0, 40.9, 49.4, 45.4, 47.2], "n_without": 52}, "TP": {"weeks": ["2026-02-23", "2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps": [33.3, 56.3, 61.2, 52.4, 55.8, 48.7, 53.4, 52.1], "completion": [{"course": "Guía", "completed": 47, "assigned": 131, "total_reps": 140, "pct": 34, "color": "#e74c3c"}, {"course": "Exploración", "completed": 51, "assigned": 131, "total_reps": 140, "pct": 36, "color": "#3498db"}, {"course": "Viaje del Paquete", "completed": 49, "assigned": 131, "total_reps": 140, "pct": 35, "color": "#27ae60"}], "course_dates": [{"course": "Guía", "date": "2026-04-09", "color": "#e74c3c"}, {"course": "Exploración", "date": "2026-04-09", "color": "#3498db"}, {"course": "Viaje del Paquete", "date": "2026-04-09", "color": "#27ae60"}], "total": 2458, "n_reps": 140, "nps_mar": 55.3, "nps_apr": 52.2, "delta_curso": -4.5, "weeks_with": ["2026-02-23", "2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_with": [33.3, 53.5, 58.3, 57.7, 51.2, 44.4, 53.9, 58.2], "n_with": 49, "weeks_without": ["2026-02-23", "2026-03-02", "2026-03-09", "2026-03-16", "2026-03-23", "2026-03-30", "2026-04-06", "2026-04-13"], "nps_without": [33.3, 65.3, 62.0, 44.1, 56.3, 50.5, 53.0, 41.8], "n_without": 91}};
+const courseList   = ["Guía", "Exploración", "Viaje del Paquete"];
+const courseColors = ["#e74c3c", "#3498db", "#27ae60"];
+const officeTarget = {"INT": {"2026-03": 59.5, "2026-04": 62.5}, "KTA": {"2026-03": 60.0, "2026-04": 61.0}, "OL": {"2026-03": 45.4, "2026-04": 48.4}, "TP": {"2026-03": 59.3, "2026-04": 62.1}};
+
+function npsColor(v){ return v>=20?'#27ae60':v>=0?'#f39c12':'#e74c3c'; }
+function npsStr(v)  { return (v>=0?'+':'')+v.toFixed(1); }
+
+function nearestWeek(weeks, dateStr){
+  const ts = new Date(dateStr).getTime();
+  let best=weeks[0], diff=Infinity;
+  weeks.forEach(w=>{ const d=Math.abs(new Date(w).getTime()-ts); if(d<diff){diff=d;best=w;} });
+  return best;
+}
+
+// ── OFFICE GRID ─────────────────────────────────────────
+function buildOfficeGrid(){
+  const grid = document.getElementById('office-grid');
+  Object.keys(officeData).sort().forEach(office=>{
+    const d = officeData[office];
+    const npsMar     = d.nps_mar;
+    const npsApr     = d.nps_apr;
+    const deltaCurso = d.delta_curso;
+
+    const offTgt  = officeTarget[office] || {};
+    const tgtMar  = offTgt['2026-03'] != null ? offTgt['2026-03'] : null;
+    const tgtApr  = offTgt['2026-04'] != null ? offTgt['2026-04'] : null;
+    const marColor = npsMar!==null ? (tgtMar!==null ? (npsMar>=tgtMar?'#27ae60':'#e74c3c') : npsColor(npsMar)) : '#aaa';
+    const aprColor = npsApr!==null ? (tgtApr!==null ? (npsApr>=tgtApr?'#27ae60':'#e74c3c') : npsColor(npsApr)) : '#aaa';
+
+    const monthTag = '<div style="display:flex;gap:4px;justify-content:flex-end">'
+      + `<span class="badge" style="background:${marColor};font-size:.8rem;padding:.25em .5em" title="Target: ${tgtMar!=null?(tgtMar>=0?'+':'')+tgtMar:'S/D'}">Mar: ${npsMar!==null?npsStr(npsMar):'S/D'}</span>`
+      + `<span class="badge" style="background:${aprColor};font-size:.8rem;padding:.25em .5em" title="Target: ${tgtApr!=null?(tgtApr>=0?'+':'')+tgtApr:'S/D'}">Abr: ${npsApr!==null?npsStr(npsApr):'S/D'}</span>`
+      + '</div>';
+
+    const cursoTag = deltaCurso!==null
+      ? `<small style="color:${deltaCurso>=0?'#27ae60':'#e74c3c'}">${deltaCurso>=0?'▲':'▼'} ${Math.abs(deltaCurso).toFixed(1)} post-cursos</small>`
+      : (d.course_dates.length ? '<small style="color:#aaa">Sin datos pre-cursos</small>' : '<small style="color:#aaa">Sin cursos</small>');
+
+    const compHtml = d.completion.map(c=>`
+      <div class="d-flex justify-content-between mb-1" style="font-size:.78rem">
+        <span><span class="dot" style="background:${c.color}"></span>${c.course}</span>
+        <span class="fw-bold">${c.pct}%</span>
+      </div>
+      <div class="progress mb-2" style="height:6px;border-radius:3px">
+        <div class="progress-bar" style="width:${c.pct}%;background:${c.color}"></div>
+      </div>
+      <div style="font-size:.72rem;color:#999;margin-top:-6px;margin-bottom:8px">${c.completed}/${c.assigned} asignados</div>
+    `).join('');
+
+    const safeId = 'oc-'+office.replace(/[^a-zA-Z0-9]/g,'_');
+    const card = document.createElement('div');
+    card.className='office-card';
+    card.innerHTML=`
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div>
+          <div class="office-name">${office}</div>
+          <div class="office-meta">${d.n_reps} representantes · ${d.total.toLocaleString()} encuestas</div>
+        </div>
+        <div class="text-end">${monthTag}<br>${cursoTag}</div>
+      </div>
+      <div class="row g-2">
+        <div class="col-5">
+          <div class="group-label" style="background:#fff0ee;color:#c0392b">Sin cursos (${d.n_without} reps)</div>
+          <div class="chart-sm"><canvas id="${safeId}_woc"></canvas></div>
+        </div>
+        <div class="col-5">
+          <div class="group-label" style="background:#eafaf1;color:#1e8449">Con cursos (${d.n_with} reps)</div>
+          <div class="chart-sm"><canvas id="${safeId}_wc"></canvas></div>
+        </div>
+        <div class="col-2">
+          <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#666;margin-bottom:.4rem">Completitud</div>
+          ${compHtml}
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    setTimeout(()=>{
+      drawGroupChart(safeId+'_woc', d.weeks_without, d.nps_without, [],            '#c0392b', 'rgba(192,57,43,.08)');
+      drawGroupChart(safeId+'_wc',  d.weeks_with,    d.nps_with,    d.course_dates,'#27ae60', 'rgba(39,174,96,.08)');
+    },0);
+  });
+}
+
+function drawGroupChart(canvasId, weeks, npsData, courseDates, lineColor, bgColor){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  if(!weeks.length){
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#bbb'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Sin datos', canvas.width/2, canvas.height/2);
+    return;
+  }
+
+  const annotations = {};
+  courseDates.forEach((c,i)=>{
+    if(!weeks.length) return;
+    const w = nearestWeek(weeks, c.date);
+    annotations['cd'+i]={
+      type:'line', scaleID:'x', value:w,
+      borderColor:c.color, borderWidth:2, borderDash:[5,4],
+      label:{ content:c.course, display:true, position:'start',
+              backgroundColor:c.color, color:'#fff',
+              font:{size:9}, padding:{x:5,y:3}, borderRadius:3 }
+    };
+  });
+
+  new Chart(canvas,{
+    type:'line',
+    data:{
+      labels:weeks,
+      datasets:[{
+        label:'NPS', data:npsData,
+        borderColor:lineColor, backgroundColor:bgColor,
+        borderWidth:2, pointRadius:3, pointHoverRadius:5, fill:true, tension:.3
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{annotations},
+        tooltip:{callbacks:{label:c=>'NPS: '+npsStr(c.raw)}}
+      },
+      scales:{
+        x:{ticks:{font:{size:9}, maxTicksLimit:6}},
+        y:{min:-100,max:100,
+           ticks:{font:{size:9}, callback:v=>(v>=0?'+':'')+v},
+           grid:{color:'rgba(0,0,0,.05)'}}
+      }
+    }
+  });
+}
+
+// ── REP CHART ────────────────────────────────────────────
+let repChart = null;
+
+function filterReps(q){
+  const sel = document.getElementById('rep-select');
+  const ql  = q.toLowerCase();
+  Array.from(sel.options).forEach(o=>{
+    if(!o.value){ o.style.display=''; return; }
+    o.style.display = o.text.toLowerCase().includes(ql) ? '' : 'none';
+  });
+}
+
+function loadRep(rep){
+  if(!rep||!repData[rep]){
+    document.getElementById('rep-section').style.display='none';
+    document.getElementById('rep-placeholder').style.display='';
+    return;
+  }
+  document.getElementById('rep-placeholder').style.display='none';
+  document.getElementById('rep-section').style.display='';
+
+  const d = repData[rep];
+  document.getElementById('rep-title').textContent = rep + ' — ' + d.office;
+
+  const lastNps = d.nps.length ? d.nps[d.nps.length-1] : null;
+  const firstNps= d.nps.length ? d.nps[0] : null;
+  const delta   = (lastNps!==null&&firstNps!==null) ? lastNps-firstNps : null;
+
+  const coursesHtml = d.courses.length
+    ? d.courses.map(c=>`
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span style="font-size:.82rem"><span class="dot" style="background:${c.color}"></span>${c.course}</span>
+          <span class="text-muted" style="font-size:.78rem">${c.date}</span>
+        </div>`).join('')
+    : '<p class="text-muted" style="font-size:.82rem">Sin cursos registrados</p>';
+
+  const deltaHtml = delta!==null
+    ? `<div style="font-size:.8rem;color:${delta>=0?'#27ae60':'#e74c3c'};margin-top:3px">${delta>=0?'▲':'▼'} ${Math.abs(delta).toFixed(1)} vs inicio</div>`
+    : '';
+
+  document.getElementById('rep-detail').innerHTML=`
+    <div class="mb-3">
+      <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#888">NPS Último Período</div>
+      <div style="font-size:2rem;font-weight:700;color:${lastNps!==null?npsColor(lastNps):'#ccc'}">${lastNps!==null?npsStr(lastNps):'N/A'}</div>
+      ${deltaHtml}
+    </div>
+    <div class="mb-3">
+      <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#888">Encuestas recibidas</div>
+      <div style="font-size:1.6rem;font-weight:700;color:var(--navy)">${d.total}</div>
+    </div>
+    <div>
+      <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:.5rem">Cursos (${d.courses.length}/3)</div>
+      ${coursesHtml}
+    </div>`;
+
+  // annotations
+  const annotations = {};
+  d.courses.forEach((c,i)=>{
+    if(!d.weeks.length) return;
+    const w = nearestWeek(d.weeks, c.date);
+    annotations['c'+i]={
+      type:'line', scaleID:'x', value:w,
+      borderColor:c.color, borderWidth:2.5, borderDash:[6,4],
+      label:{ content:c.course, display:true, position:'start',
+              backgroundColor:c.color, color:'#fff',
+              font:{size:10}, padding:{x:6,y:4}, borderRadius:4 }
+    };
+  });
+
+  if(repChart) repChart.destroy();
+  repChart = new Chart(document.getElementById('rep-chart'),{
+    type:'line',
+    data:{
+      labels:d.weeks,
+      datasets:[{
+        label:'NPS Semanal', data:d.nps,
+        borderColor:'#2D3277', backgroundColor:'rgba(45,50,119,.07)',
+        borderWidth:2.5,
+        pointRadius:4,
+        pointBackgroundColor: d.nps.map(v=>npsColor(v)),
+        pointHoverRadius:6, fill:true, tension:.3
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{annotations},
+        tooltip:{callbacks:{label:c=>'NPS: '+npsStr(c.raw)}}
+      },
+      scales:{
+        x:{ticks:{font:{size:10}, maxTicksLimit:10}},
+        y:{min:-100,max:100,
+           ticks:{callback:v=>(v>=0?'+':'')+v},
+           grid:{color:'rgba(0,0,0,.05)'}}
+      }
+    }
+  });
+}
+
+buildOfficeGrid();
+</script>
+</body>
+</html>
